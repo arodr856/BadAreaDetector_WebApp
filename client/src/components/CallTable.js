@@ -23,7 +23,7 @@ function CallTable(props) {
     var id = 0;
 
     const rows = 
-        props.policeCall.map(({ A, H, L, B, I }) => {
+        props.policeCall.map(({ A, H, L, B, O }) => {
             return (
                 {
                 id: (++id).toString(),
@@ -31,7 +31,7 @@ function CallTable(props) {
                 Location_Key: H,
                 Priority_Key: L,
                 Date_Key: B,
-                Call_Type_Key: I,
+                Call_Type_Key: O,
                 Crime_in_the_Area_Key: 'Low'
             }
         )
