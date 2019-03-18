@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\public",
+    "\\client\\src",
+    "\\client\\src\\actions",
+    "\\client\\src\\components",
+    "\\client\\src\\components\\css components",
+    "\\client\\src\\reducers",
+    "\\models",
+    "\\routes"
+  ],
+  "SelectedNode": "\\client\\src\\components\\Header.js",
+  "PreviewInSolutionExplorer": false
+}

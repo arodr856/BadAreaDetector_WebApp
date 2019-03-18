@@ -1,0 +1,262 @@
+body {
+    background-color: #051e3e;
+    font-family: Arial;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+    width: 100px;
+    height: 55px;
+    padding-top: 13px;
+}
+
+
+
+/* CSS for Header Component */
+.imageClass {
+    padding-top: 13px;
+    width: 100px;
+    height: 55px;
+    font-family: 'Gill Sans'
+}
+
+.header h1 {
+        font-size: 50px;
+        color:aliceblue;
+}
+
+.icon {
+    width: 10%;
+    height: 10%;
+    fill: red;
+    margin-right: 10%;
+}
+
+.overflowClass {
+    padding-left: 10%;
+    margin-right: 20%
+}
+
+
+
+.header {
+    padding: 2px;
+    text-align: center;
+    background: #851e3e;
+    width: 100%;
+}
+
+.Menu {
+    background: #851e3e;
+    float: right;
+}
+
+.bxcalendarMove {
+    margin-top: 10%;
+    margin-left: 2%;
+    width: 5%;
+    height: 20%
+
+}
+
+.tester{
+    white-space: nowrap;
+    overflow:hidden;
+    display:inline-block;
+}
+
+
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+}
+
+
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 0%;
+}
+
+    /* Left and right column */
+    .column.tableleft {
+        width: 55%;
+        padding-left: 1%;
+    }
+
+    /* Middle column */
+    .column.tableright {
+        width: 45%;
+        padding-left: 1%;
+    }
+
+    
+
+/* Create three unequal columns that floats next to each other */
+.column2 {
+    float: left;
+    padding: 10px;
+}
+
+    /* Left and right column */
+.column.piecharts {
+    width: 55%;
+    height: 40%;
+    background-color: #451e3e;
+}
+
+    /* Middle column */
+.column.map {
+    width: 30%;
+    background-color: #051e3e;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row {
+    background-color: #651e3e;
+}
+
+.piesection {
+    background-color: blue;
+}
+
+.rowNew {
+    background-color: black;
+}
+
+.centerGauge {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+/*Graphs CSS*/
+
+.graphsHeader {
+    text-align: center;
+    margin-top: 1.36%;
+}
+
+/*Visualizers CSS*/
+
+.callTypeHeader {
+    text-align: center;
+    padding-top: 1.5%;
+    padding-bottom: 1%;
+}
+
+.gauge1 {
+    width: 192px;
+    display: inline-block;
+    margin-right: 5%;
+    margin-left: 4%;
+}
+
+.gauge234 {
+    width: 18%;
+    display: inline-block;
+    margin-right: 5%;
+}
+
+.gaugeText {
+    padding-left: 34%;
+}
+
+
+.callDescSection {
+    background-color: #251e3e;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1.5%;
+    color: black;
+}
+
+.callDescHeader {
+    color: white;
+    text-align: center;
+    padding-bottom: 1.5%;
+
+}
+
+.scrollBar {
+    height: 200px;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: white
+}
+
+/* Map Visualizer CSS */
+.mapContainerCSS{
+    padding-bottom:0%;
+    padding-top: 0%;
+}
+
+/* Data Table CSS */
+/*Does not work*/
+.tableStyle {
+    width: 60%;
+}
+
+.bodyTable{
+        
+        background-color: #451e3e;
+        margin-right: 20%;
+        padding-right: 20%;
+        padding: 40%;
+        width: auto;
+}
+
+.bodyTable :hover {
+    opacity: 0.7;
+}
+
+.headerUnstyle {
+    border: none;
+    background-color: #651e3e;
+    display: compact;
+    padding-right: 5%
+}
+
+.searchBar {
+    color: aliceblue;
+    background-color: #851E3E;
+}

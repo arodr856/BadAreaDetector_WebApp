@@ -1,0 +1,29 @@
+{
+  "name": "ov4169pq36",
+  "description": null,
+  "version": "0.0.11",
+  "dependencies": {
+    "carbon-addons-data-viz-react": "^1.21.0",
+    "carbon-components": "^9.84.1",
+    "carbon-components-react": "^6.106.1",
+    "carbon-icons": "^7.0.7",
+    "google-maps-react": "^2.0.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-scrollbars-custom": "^3.1.5",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5000/"
+}
