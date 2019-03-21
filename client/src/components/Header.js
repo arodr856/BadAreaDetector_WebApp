@@ -145,7 +145,7 @@ class Header extends React.Component {
 
                         <hr />
                         <br />
-                        Live Feed
+                        Simulation
                         <Toggle
                             defaultToggled
                             id='toggler'

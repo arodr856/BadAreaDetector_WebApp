@@ -37,15 +37,31 @@ class CallTable extends React.Component {
         
     }
 
-    simulateData(obj, index, refresh, length) {
+    simulateData(obj, index, refresh, length, row) {
 
         
         setTimeout(() => {
             if (this.props.toggle && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length) && (this.props.refresh == refresh)) {
-                    if (index < obj.length) {
-                        console.log('The length is: ' + obj.length + ' ... index is: ' + index)
+                if (index < obj.length) {
+                    console.log('The length is: ' + obj.length + ' ... index is: ' + index)
+
+                    //console.log('This is ROWS with ID: ' + rows[index].id)  THESE WORK!
+                    //console.log(row[index].cells.map(cell => (cell.id + ' ' + cell.value)))  THESE WORK!
+
+                    {
+                        <TableRow key={row[index].id}>
+                            {row[index].cells.map(cell => (
+                                <TableData>
+                                    <div style={this.divStyle}>
+                                        {<TableCell key={cell.id}> {cell.value} </TableCell>}
+                                    </div>
+                                </TableData>
+                            ))}
+                            </TableRow>
+                    }
+
                         console.log(obj[index++])
-                        this.simulateData(obj, index, refresh, length)
+                        this.simulateData(obj, index, refresh, length, row)
                     }
 
                     else {
@@ -53,7 +69,6 @@ class CallTable extends React.Component {
                     }
                 }
             }, refresh * 1000)
-        
     }
 
     displayAllData(obj) {
@@ -164,7 +179,7 @@ class CallTable extends React.Component {
 
                                         
                                         {this.props.toggle ? (
-                                            this.simulateData(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, 0, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length)
+                                            this.simulateData(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, 0, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length, rows)
                                             )
                                             : (rows.map(row => (
                                                 <TableRow key={row.id}>
