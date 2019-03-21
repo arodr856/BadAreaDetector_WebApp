@@ -26,7 +26,7 @@ class Graphs extends React.Component {
             setTimeout(
                 () => {
 
-                    if (this.state.liveToggled) {
+                    if (this.props.toggle) {
 
                         this.setState({
                             value: Math.ceil(Math.random() * 100),

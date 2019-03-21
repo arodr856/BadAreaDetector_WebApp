@@ -2,8 +2,11 @@ import React from 'react'
 import { DataTable } from 'carbon-components-react';
 import { connect } from 'react-redux';
 import { TableData } from 'carbon-components-react';
+import { clearInterval } from 'timers';
 
-
+var rows;
+var addCall = 0;
+var isRunning = false;
 
 const {
     TableContainer,
@@ -30,16 +33,35 @@ class CallTable extends React.Component {
             filteredData: this.props.filteredCalls
         };
 
-
+        this.simulateData = this.simulateData.bind(this)
+        
     }
 
+    simulateData(obj, index, refresh, length) {
 
-    render() {
+        
+        setTimeout(() => {
+            if (this.props.toggle && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length) && (this.props.refresh == refresh)) {
+                    if (index < obj.length) {
+                        console.log('The length is: ' + obj.length + ' ... index is: ' + index)
+                        console.log(obj[index++])
+                        this.simulateData(obj, index, refresh, length)
+                    }
+
+                    else {
+                        console.log('Simulation has ended!')
+                    }
+                }
+            }, refresh * 1000)
+        
+    }
+
+    displayAllData(obj) {
 
         var id = 0;
 
-        const rows =
-            this.props.policeCall.map(({ A, H, L, B, I }) => {
+        rows =
+            obj.map(({ A, H, L, B, I }) => {
                 return (
                     {
                         id: (++id).toString(),
@@ -52,9 +74,25 @@ class CallTable extends React.Component {
                     }
                 )
             })
+    }
 
+    render() {
 
-        console.log(rows[0])
+        //console.log('This is a toggle: ' + this.props.toggle)
+        //console.log('This is a toggle from STATE: ' + this.state.liveToggled)
+        
+
+        if (this.props.filteredCalls == null) {
+            console.log('Data is null')
+            //console.log('THIS IS TOGGLE NOT FILTERED CALLS: ' + this.props.toggle)
+            this.displayAllData(this.props.policeCall)
+        }
+        else {
+            console.log('Display Filter')
+            //console.log('THIS IS TOGGLE IN FILTERED CALLS: ' + this.state.liveToggled)
+            this.displayAllData(this.props.filteredCalls)
+        }
+
 
 
         const headers = [
@@ -123,20 +161,24 @@ class CallTable extends React.Component {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody className='bodyTable'>
-                                        {rows.map(row => (
-                                            <TableRow key={row.id}>
 
-                                                {row.cells.map(cell => (
-                                                    <TableData>
-                                                        <div style={divStyle}>
-                                                            {<TableCell key={cell.id}> {cell.value} </TableCell>}
+                                        
+                                        {this.props.toggle ? (
+                                            this.simulateData(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, 0, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length)
+                                            )
+                                            : (rows.map(row => (
+                                                <TableRow key={row.id}>
+                                                    {row.cells.map(cell => (
+                                                        <TableData>
+                                                            <div style={divStyle}>
+                                                                {<TableCell key={cell.id}> {cell.value} </TableCell>}
+                                                            </div>
+                                                        </TableData>
+                                                    ))}
 
-                                                        </div>
-                                                    </TableData>
-                                                ))}
-
-                                            </TableRow>
-                                        ))}
+                                                </TableRow>
+                                            )))
+                                        }
                                     </TableBody>
                                 </div>
                             </Table>

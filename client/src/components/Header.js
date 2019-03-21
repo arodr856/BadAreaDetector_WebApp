@@ -5,6 +5,10 @@ import { iconMenu } from 'carbon-icons'
 import { connect } from 'react-redux';
 import { toggleLive, updateRefresh, getPoliceCalls, filteredData } from '../actions/policecallActions';
 
+var isToggledAlready = true;
+var toggleInput = false;
+var toggleRefresh = 5;
+
 
 class Header extends React.Component {
 
@@ -13,45 +17,43 @@ class Header extends React.Component {
 
         this.state = {
             refreshValue: 5,
-            liveToggled: true,
+            liveToggled: false,
             startDate: '1/1/2017',
             endDate: '8/12/2017',
-            filteredData: 'null'
+            filteredData: null
         };
 
         this.sliderHandler = this.sliderHandler.bind(this)
         this.toggleHandler = this.toggleHandler.bind(this)
         this.dateHandler = this.dateHandler.bind(this)
         this.filterDates = this.filterDates.bind(this)
+        this.submitHandler = this.submitHandler.bind(this)
     }
 
     componentDidMount() {
         setTimeout(
             () => {
-                if (this.state.liveToggled) {
-                    console.log('From Header: ' + this.state.refreshValue);
+                if (toggleInput) {
+                    console.log('Refresh... Rate: ' + toggleRefresh + ' ...Boolean is: ' + toggleInput)
+                    isToggledAlready = false;
                     this.componentDidMount()
                 }
             },
-            this.state.refreshValue * 1000);
+            toggleRefresh * 1000);
     }
 
     sliderHandler(value) {
-        console.log('Slider value is: ' + value.value)
-        console.log('Value is changed!')
         this.setState({ refreshValue: value.value })
-        this.props.updateRefresh(value.value);
     }
 
     toggleHandler(toggled) {
-        this.props.toggleLive(toggled); // in app state
+        //this.props.toggleLive(toggled); // in app state
         if (toggled) {
-            console.log('Live Feed: ' + toggled)
+            //console.log('Live Feed: ' + toggled)
             this.setState({ liveToggled: true })
-            this.componentDidMount()
         }
         else {
-            console.log('Live Feed:' + toggled)
+            //console.log('Live Feed:' + toggled)
             this.setState({ liveToggled: false })
         }
     }
@@ -67,8 +69,8 @@ class Header extends React.Component {
                 var date2 = new Date(value[1])
                 var endDate = (date2.getMonth() + 1) + '/' + date2.getDate() + '/' + date2.getFullYear() + ' 23:59'
 
-                console.log('Start date: ' + startDate)
-                console.log('End date: ' + endDate)
+                //console.log('Start date: ' + startDate)
+                //console.log('End date: ' + endDate)
 
                 this.setState({ startDate: startDate, endDate: endDate });
 
@@ -93,11 +95,30 @@ class Header extends React.Component {
             return obj.B >= start && obj.B <= end
         })
 
+        this.setState({ filteredData: filteredObj })
+        //console.log('THIS IS THE DATE AFTER: ' + this.state.filteredData.length)
+        //this.props.filteredData(filteredObj)
+    }
 
+    submitHandler() {
+        console.log('Submited...')
+        //console.log('This is the LIVE TOGGLED: ' + this.state.liveToggled)
+        this.props.toggleLive(this.state.liveToggled);
+        this.props.filteredData(this.state.filteredData);
+        this.props.updateRefresh(this.state.refreshValue);
 
-        console.log('Successfully filtered Data')
+        toggleInput = this.state.liveToggled
+        toggleRefresh = this.state.refreshValue
+        //console.log('ToggleInput is: ' + toggleInput)
+        //console.log('Is ToggledAlready: ' + isToggledAlready)
 
-        this.props.filteredData(filteredObj)
+        if (!toggleInput) {
+            isToggledAlready = true;
+        }
+
+        if (this.state.liveToggled && isToggledAlready) {
+            this.componentDidMount()
+        }
     }
 
 
@@ -116,10 +137,7 @@ class Header extends React.Component {
                     <ModalWrapper
                         renderTriggerButtonIcon={true}
                         buttonTriggerText="Menu"
-
-                        handleSubmit={function () {
-                            console.log('Submited...')
-                        }}
+                        handleSubmit={this.submitHandler}
                     >
                         <div style={{ textAlign: "center" }}>
                             Menu
@@ -131,7 +149,9 @@ class Header extends React.Component {
                         <Toggle
                             defaultToggled
                             id='toggler'
+                            toggled={this.state.liveToggled}
                             onToggle={this.toggleHandler}
+                            
                         />
 
                         <hr />

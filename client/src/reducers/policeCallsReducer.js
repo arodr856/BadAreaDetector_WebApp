@@ -4,7 +4,7 @@ const initialState = {
     policeCall:[],
     loading: false,
     refreshValue: 5,
-    liveToggled: true,
+    liveToggled: false,
     startDate: null,
     endDate: null,
     filteredData: null
@@ -17,7 +17,7 @@ const policeCallsReducer = (state = initialState, action) => {
         case UPDATE_REFRESH:
             return {...state, refreshValue: action.payload};
         case TOGGLE_LIVE:
-            return { ...state, liveToggled: !state.liveToggled };
+            return { ...state, liveToggled: action.payload };
         case FILTERED_DATA:
             return { ...state, filteredData: action.payload };
         default:

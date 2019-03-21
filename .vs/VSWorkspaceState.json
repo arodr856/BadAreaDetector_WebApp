@@ -11,6 +11,6 @@
     "\\models",
     "\\routes"
   ],
-  "SelectedNode": "\\client\\src\\components\\Header.js",
+  "SelectedNode": "\\client\\src\\reducers\\policeCallsReducer.js",
   "PreviewInSolutionExplorer": false
 }
