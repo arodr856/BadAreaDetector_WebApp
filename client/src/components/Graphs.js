@@ -30,17 +30,17 @@ class Graphs extends React.Component {
 
                         this.setState({
                             value: Math.ceil(Math.random() * 100),
-                            refreshValue: this.props.refresh,
-                            liveToggled: this.props.toggle,
-                            filteredData: this.props.filteredCalls
+                            //refreshValue: this.props.refresh,
+                            //liveToggled: this.props.toggle,
+                            //filteredData: this.props.filteredCalls
                         });
-                        console.log('In Graphs: ' + this.state.refreshValue)
-                        console.log('Toggle in Graphs: ' + this.state.liveToggled)
+                        console.log('In Graphs: ' + this.props.refresh)
+                        console.log('Toggle in Graphs: ' + this.props.toggle)
                         //console.log('This is filtered Data: ' + this.state.filteredData)
                         this.simulate()
                     }
                 },
-                this.state.refreshValue * 1000);
+                this.props.refresh * 1000);
     }
 
     
@@ -90,10 +90,13 @@ class Graphs extends React.Component {
 
         
 
-        if (simulateOnce) {
+        if (this.props.toggle && simulateOnce) {
             simulateOnce = false;
             console.log('Simulate once is: ' + simulateOnce);
             this.simulate()
+        }
+        else if (!this.props.toggle) {
+            simulateOnce = true;
         }
         
 
