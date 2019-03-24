@@ -230,7 +230,7 @@ class Graphs extends React.Component {
 
 
                 <div class="column tableleft">
-                    <h1 className="graphsHeader" style={{ color: 'aliceblue', paddingTop: '3%' }}>Priority Call Stats </h1> {/* Remove Padding if Button moves location */}
+                    <h1 className="graphsHeader" style={{ color: '#4F6472', paddingTop: '3%' }}>Priority Call Stats </h1> {/* Remove Padding if Button moves location */}
 
                     <div style={{ color: 'black' }}>
                         <BarGraph
@@ -261,9 +261,9 @@ class Graphs extends React.Component {
 
 
                 <div class="column tableright">
-                    <h1 className="graphsHeader" style={{ color: 'aliceblue' }}>Incoming call stats</h1>
+                    <h1 className="graphsHeader" style={{ color: '#4F6472' }}>Incoming call stats</h1>
 
-                    <div style={{ color: 'black' }}>
+                    <div style={{ color: '#4F6472' }}>
                         <LineGraph
                             data={[[[(this.state.value + januaryAL[2] + januaryAL[3] + januaryAL[4])], 1], [[(februaryAL[1] + februaryAL[2] + februaryAL[3] + februaryAL[4])], 2], [[(marchAL[1] + marchAL[2] + marchAL[3] + marchAL[4])], 3], [[(aprilAL[1] + aprilAL[2] + aprilAL[3] + aprilAL[4])], 4], [[(mayAL[1] + mayAL[2] + mayAL[3] + mayAL[4])], 5], [[(juneAL[1] + juneAL[2] + juneAL[3] + juneAL[4])], 6], [[(julyAL[1] + julyAL[2] + julyAL[3] + julyAL[4])], 7], [[(augustAL[1] + augustAL[2] + augustAL[3] + augustAL[4])], 8]]}
                             width={820}

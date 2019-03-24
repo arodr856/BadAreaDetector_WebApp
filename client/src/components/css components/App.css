@@ -1,5 +1,5 @@
 body {
-    background-color: #051e3e;
+    background-color: #E2E8ED;
     font-family: Arial;
     overflow-x: hidden;
 }
@@ -28,8 +28,8 @@ body {
 }
 
 .header h1 {
-        font-size: 50px;
-        color:aliceblue;
+    font-size: 50px;
+    color: #4F6472;
 }
 
 .icon {
@@ -49,7 +49,7 @@ body {
 .header {
     padding: 2px;
     text-align: center;
-    background: #851e3e;
+    background: #E2E8ED;
     width: 100%;
 }
 
@@ -123,13 +123,13 @@ body {
 .column.piecharts {
     width: 55%;
     height: 40%;
-    background-color: #451e3e;
+    background-color: #E2E8ED; /* GAUGES CSS BACKGROUND-COLOR */
 }
 
     /* Middle column */
 .column.map {
     width: 30%;
-    background-color: #051e3e;
+    background-color: #E2E8ED; /* MAP SIDE CSS BACKGROUND-COLOR */
     padding-bottom: 0%;
     margin-bottom: 0%;
 }
@@ -142,11 +142,11 @@ body {
 }
 
 .row {
-    background-color: #651e3e;
+    background-color: #E2E8ED;  /* GRAPHS CSS BACKGROUND-COLOR */
 }
 
 .piesection {
-    background-color: blue;
+    background-color: #E2E8ED;
 }
 
 .rowNew {
@@ -195,7 +195,7 @@ body {
 
 
 .callDescSection {
-    background-color: #251e3e;
+    background-color: #E2E8ED; /* CALL TABLE BACKGROUND CSS */
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1.5%;
@@ -203,10 +203,9 @@ body {
 }
 
 .callDescHeader {
-    color: white;
+    color: #4F6472;
     text-align: center;
     padding-bottom: 1.5%;
-
 }
 
 .scrollBar {
@@ -236,13 +235,12 @@ body {
     width: 60%;
 }
 
-.bodyTable{
-        
-        background-color: #451e3e;
-        margin-right: 20%;
-        padding-right: 20%;
-        padding: 40%;
-        width: auto;
+.bodyTable {
+    background-color: #748B99;
+    margin-right: 20%;
+    padding-right: 20%;
+    padding: 40%;
+    width: auto;
 }
 
 .bodyTable :hover {
@@ -251,12 +249,12 @@ body {
 
 .headerUnstyle {
     border: none;
-    background-color: #651e3e;
+    background-color: #748B99;
     display: compact;
-    padding-right: 5%
+    padding-right: 5%;
 }
 
 .searchBar {
     color: aliceblue;
-    background-color: #851E3E;
+    background-color: #A3B5BF;
 }

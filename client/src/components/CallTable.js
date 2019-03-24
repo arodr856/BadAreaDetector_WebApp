@@ -6,9 +6,8 @@ import { clearInterval, setTimeout } from 'timers';
 
 var rows;
 var addCall = 0;
-var isRunning = false;
 var simulateOnce = true;
-
+var simulateData = '';
 
 const {
     TableContainer,
@@ -37,52 +36,41 @@ class CallTable extends React.Component {
         };
 
         this.simulateData = this.simulateData.bind(this)
-
     }
 
-    simulateData(rows) {
+    //(this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length) && (this.props.refresh == refresh))
+
+    simulateData(rows, refresh, length) {
+        console.log('LAUNCHING!')
+        console.log('...Refresh is: ' + refresh + '...length: ' + length + '...Addcall is: ' + addCall)
 
 
         setTimeout(() => {
 
-            if (this.props.toggle && this.state.index < rows.length - 1) {
-                this.setState({ index: ++this.state.index })
-                console.log('THIS IS THE INDEX: ' + this.state.index)
-                console.log('THIS IS THE ROWS LENGTH: ' + rows.length)
-                this.simulateData(rows)
+            if (this.props.toggle && this.props.refresh == refresh && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length)) {
+                if (addCall < rows.length - 1) {
+                    ++addCall
+                    this.forceUpdate()
+                    this.simulateData(rows, refresh, length)
+                }
+                else { //case: Simulation is finished, but user selects other filtered date
+                    addCall = 0;
+                    simulateOnce = true;
+                    console.log('Simulation finished!!!')
+                }
             }
             else {
-                console.log('Simulation Finished!')
+                if (this.props.toggle) {
+                    addCall = 0
+                    console.log('DATA CHANGED')
+                    this.forceUpdate()
+                    this.simulateData(this.props.filteredCalls == null ? this.displayAllData(this.props.policeCall) : this.displayAllData(this.props.filteredCalls), this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length)
+                }
+                else {
+                    console.log('Simulation Finished!')
+                }
             }
-
-            //if (this.props.toggle && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length) && (this.props.refresh == refresh)) {
-            //    if (index < obj.length) {
-            //        console.log('The length is: ' + obj.length + ' ... index is: ' + index)
-
-            //        //console.log('This is ROWS with ID: ' + rows[index].id)  
-            //        console.log(row[index].cells.map(cell => (cell.id + ' ' + cell.value))) 
-            //        {
-            //            <TableRow key={row[index].id}>
-            //                {row[index].cells.map(cell => (
-            //                    <TableData>
-            //                        <div style={this.divStyle}>
-            //                            <TableCell key={cell.id}>{cell.value}</TableCell>
-            //                        </div>
-            //                    </TableData>
-            //                ))}
-            //            </TableRow>
-                        
-            //        }
-                     
-
-            //        console.log(obj[index++])
-            //        this.simulateData(obj, index, refresh, length, row)
-            //    }
-
-            //    else {
-            //        console.log('Simulation has ended!')
-            //    }
-            //}
+            
         }, this.props.refresh * 1000)
     }
 
@@ -104,37 +92,31 @@ class CallTable extends React.Component {
                     }
                 )
             })
+        return rows
     }
 
     render() {
 
-        //console.log('This is a toggle: ' + this.props.toggle)
-        //console.log('This is a toggle from STATE: ' + this.state.liveToggled)
-
-
-        if (this.props.filteredCalls == null) {
-            console.log('Data is null')
-            //console.log('THIS IS TOGGLE NOT FILTERED CALLS: ' + this.props.toggle)
+        //Setting Initial "rows" value for non simulated rendering
+        if (this.props.filteredCalls == null && simulateOnce) {
             this.displayAllData(this.props.policeCall)
         }
-        else {
-            console.log('Display Filter')
-            //console.log('THIS IS TOGGLE IN FILTERED CALLS: ' + this.state.liveToggled)
+        else if (this.props.filteredCalls != null && simulateOnce) {
             this.displayAllData(this.props.filteredCalls)
         }
-
-
+        
+            
         //IMPLEMENT SIMULATION
         if (this.props.toggle && simulateOnce) {
             simulateOnce = false;
-            this.simulateData(rows)
+            this.simulateData(this.props.filteredCalls == null ? this.displayAllData(this.props.policeCall) : this.displayAllData(this.props.filteredCalls), this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length) //Object, Count, Refresh, length
         }
-        else if (!this.props.toggle) {
+
+        else if (!this.props.toggle) { // RESET VALUES WHEN TOGGLE IS TRIGGERED OFF
             simulateOnce = true;
-            //this.setState({ index : 0 })
+            addCall = 0
         }
-
-
+        
 
         const headers = [
             {
@@ -169,7 +151,7 @@ class CallTable extends React.Component {
         ]
 
         var divStyle = {
-            color: 'white',
+            color: '#E2E8ED',
             padding: '2%',
         };
 
@@ -180,16 +162,13 @@ class CallTable extends React.Component {
             <div className="callDescSection">
                 <h1 className="callDescHeader">Call Description</h1>
 
-
-
-
                     {this.props.toggle ? (
                     <div>
                         <DataTable
                             rows={rows}
                             headers={headers}
                             className='tableStyle'
-                            render={({ rows, headers, getHeaderProps, onInputChange }) => (
+                            render={({rows, headers, getHeaderProps, onInputChange }) => (
 
                                 <TableContainer>
                                     <TableToolbar className='searchBar'>
@@ -208,20 +187,15 @@ class CallTable extends React.Component {
                                             </TableHead>
                                             <TableBody className='bodyTable'>
 
-
-
-
-                                                <TableRow key={rows[this.state.index].id}>
-                                                    {rows[this.state.index].cells.map(cell => (
-                                                            <TableData>
-                                                                <div style={divStyle}>
-                                                                    {<TableCell key={cell.id}> {cell.value} </TableCell>}
-                                                                </div>
-                                                            </TableData>
-                                                        ))}
-                                                    </TableRow>
-
-
+                                                
+                                                <TableRow key={rows[addCall].id}>
+                                                    {rows[addCall].cells.map(cell => (<TableData> <div style={divStyle}>
+                                                        {<TableCell key={cell.id}>
+                                                            {cell.value}
+                                                        </TableCell>}
+                                                    </div> </TableData>))}
+                                                </TableRow>
+                                                
 
                                             </TableBody>
                                         </div>
@@ -274,16 +248,6 @@ class CallTable extends React.Component {
                         </div>
                     )
                 }
-
-
-
-
-
-
-
-
-
-
                          
             </div>
         )

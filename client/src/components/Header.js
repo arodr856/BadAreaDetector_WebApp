@@ -8,6 +8,7 @@ import { toggleLive, updateRefresh, getPoliceCalls, filteredData } from '../acti
 var isToggledAlready = true;
 var toggleInput = false;
 var toggleRefresh = 5;
+var addCall;
 
 
 class Header extends React.Component {
@@ -94,6 +95,8 @@ class Header extends React.Component {
             //console.log('String is: ' + obj.B + ' Substring is: ' + obj.B.substring(2,4))
             return obj.B >= start && obj.B <= end
         })
+        
+
 
         this.setState({ filteredData: filteredObj })
         //console.log('THIS IS THE DATE AFTER: ' + this.state.filteredData.length)

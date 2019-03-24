@@ -64,7 +64,7 @@ class Visualizer extends React.Component {
         
         return (
 
-            <div class="column piecharts" style={{ color: 'aliceblue' }}>
+            <div class="column piecharts" style={{ color: '#4F6472' }}>
 
                 {console.log('Printing from Visualizer: ' + this.props.refresh)}
 

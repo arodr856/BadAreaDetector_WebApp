@@ -11,6 +11,6 @@
     "\\models",
     "\\routes"
   ],
-  "SelectedNode": "\\client\\src\\reducers\\policeCallsReducer.js",
+  "SelectedNode": "\\client\\src\\components\\CallTable.js",
   "PreviewInSolutionExplorer": false
 }
