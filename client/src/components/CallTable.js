@@ -8,6 +8,7 @@ var rows;
 var addCall = 0;
 var simulateOnce = true;
 var simulateData = '';
+var mapVal = 0;
 
 const {
     TableContainer,
@@ -49,6 +50,7 @@ class CallTable extends React.Component {
             if (this.props.toggle && this.props.refresh == refresh && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length)) {
                 if (addCall < rows.length - 1) {
                     ++addCall
+                    mapVal = 0
                     this.forceUpdate()
                     this.simulateData(rows, refresh, length)
                 }
@@ -186,15 +188,24 @@ class CallTable extends React.Component {
                                             </TableHead>
                                             <TableBody className='bodyTable'>
 
-                                                
-                                                <TableRow key={rows[addCall].id}>
-                                                    {rows[addCall].cells.map(cell => (<TableData> <div style={divStyle}>
-                                                        {<TableCell key={cell.id}>
-                                                            {cell.value}
-                                                        </TableCell>}
-                                                    </div> </TableData>))}
-                                                </TableRow>
-                                                
+                                                {rows.map(row => (
+                                                    mapVal < addCall ? (
+                                                        ++mapVal,
+                                                        <TableRow key={row.id}>
+                                                            {row.cells.map(cell => (
+                                                            <TableData>
+                                                                <div style={divStyle}>
+                                                                    {<TableCell key={cell.id}> 
+                                                                        {cell.value}
+                                                                    </TableCell>}
+                                                                </div>
+                                                            </TableData>))}
+                                                        </TableRow>
+                                                    )
+                                                        : (
+                                                            ''
+                                                            )
+                                                ))}
 
                                             </TableBody>
                                         </div>
