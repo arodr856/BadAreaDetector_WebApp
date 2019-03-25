@@ -8,7 +8,6 @@ import { toggleLive, updateRefresh, getPoliceCalls, filteredData } from '../acti
 var isToggledAlready = true;
 var toggleInput = false;
 var toggleRefresh = 5;
-var addCall;
 
 
 class Header extends React.Component {
@@ -95,8 +94,10 @@ class Header extends React.Component {
             //console.log('String is: ' + obj.B + ' Substring is: ' + obj.B.substring(2,4))
             return obj.B >= start && obj.B <= end
         })
-        
 
+        filteredObj.sort(function (a, b) {
+            return new Date(a.B) - new Date(b.B);
+        });
 
         this.setState({ filteredData: filteredObj })
         //console.log('THIS IS THE DATE AFTER: ' + this.state.filteredData.length)
@@ -105,16 +106,13 @@ class Header extends React.Component {
 
     submitHandler() {
         console.log('Submited...')
-        //console.log('This is the LIVE TOGGLED: ' + this.state.liveToggled)
         this.props.toggleLive(this.state.liveToggled);
         this.props.filteredData(this.state.filteredData);
         this.props.updateRefresh(this.state.refreshValue);
 
         toggleInput = this.state.liveToggled
         toggleRefresh = this.state.refreshValue
-        //console.log('ToggleInput is: ' + toggleInput)
-        //console.log('Is ToggledAlready: ' + isToggledAlready)
-
+        
         if (!toggleInput) {
             isToggledAlready = true;
         }

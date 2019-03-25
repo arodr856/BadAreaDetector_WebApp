@@ -2,8 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import Gauge from './Gauge'
 import CallTable from './CallTable'
+import { GaugeGraph } from 'carbon-addons-data-viz-react'
 
 var addCall = 0;
+var gaugeDetail = 20;
+//var simulateOnce = true;
 
 class Visualizer extends React.Component {
 
@@ -15,12 +18,14 @@ class Visualizer extends React.Component {
         };
     }
 
-    componentDidMount() {
+    simulate() {
         setTimeout(
             () => {
-                if (this.state.liveToggled) {
+                if (this.props.toggle) {
                     console.log('From visualizer: ' + this.props.refresh);
-                    this.componentDidMount()
+                    gaugeDetail += 10
+                    this.forceUpdate()
+                    this.simulate()
                 }
             },
             this.props.refresh * 1000);
@@ -28,6 +33,14 @@ class Visualizer extends React.Component {
 
 
     render() {
+
+        //if (this.props.toggle && simulateOnce) {
+        //    simulateOnce = false;
+        //    this.simulate()
+        //}
+
+        //console.log('UPDATED VISUALIZER')
+        //console.log('DETAIL: ' + gaugeDetail)
 
         var priority = []
         var totalPriority = 0;
@@ -95,11 +108,12 @@ class Visualizer extends React.Component {
                 <h1 className="callTypeHeader">Call Type</h1>
 
 
-
-                <Gauge gaugeSpecs={{ id: "Gauge1", size: "half", amount: this.props.refresh, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge1' }} classProperties={{ className1: 'gauge1', className2: 'gaugeText' }} other={{ title: 'Assault' }} />
+                <Gauge gaugeSpecs={{ id: "Gauge1", size: "half", amount: gaugeDetail, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge1' }} classProperties={{ className1: 'gauge1', className2: 'gaugeText' }} other={{ title: 'Assault' }} />
                 <Gauge gaugeSpecs={{ id: "Gauge2", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge2' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Murder' }} />
                 <Gauge gaugeSpecs={{ id: "Gauge3", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge3' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Ransom' }} />
                 <Gauge gaugeSpecs={{ id: "Gauge4", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge4' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Car Theft' }} />
+
+
 
 
                 {/*Data Table with all calls*/}

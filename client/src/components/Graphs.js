@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 var simulateOnce = true;
 var addCall = 0;
+var jan;
+var janAdd;
 
 var januaryAL = []
 var februaryAL = []
@@ -36,7 +38,7 @@ class Graphs extends React.Component {
             setTimeout(
                 () => {
 
-                    if (this.props.toggle && this.props.refresh == refresh && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length)) {
+                    if (this.props.toggle && this.props.refresh === refresh && (this.props.filteredCalls === null ? this.props.policeCall.length === length : this.props.filteredCalls.length === length)) {
                         if (addCall < obj.length - 1) {
                             this.setState({
                                 value: Math.ceil(Math.random() * 100),
@@ -57,7 +59,7 @@ class Graphs extends React.Component {
                     else {
                         if (this.props.toggle) {
                             addCall = 0;
-                            this.simulate(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length)
+                            this.simulate(this.props.filteredCalls === null ? this.props.policeCall : this.props.filteredCalls, this.props.refresh, this.props.filteredCalls === null ? this.props.policeCall.length : this.props.filteredCalls.length)
                         }
                         else {
                             console.log('Simulation Finished!')
@@ -72,7 +74,7 @@ class Graphs extends React.Component {
 
         console.log('Constructing Graphs...')
 
-        if (this.props.filteredCalls == null) {
+        if (this.props.filteredCalls === null) {
             this.props.policeCall.map(({ B, L }) => {
                 //January
                 if (B.substring(0, 1) === "1") {
@@ -363,30 +365,18 @@ class Graphs extends React.Component {
         else if (!this.props.toggle) {
             simulateOnce = true;
         }
-        
+
+        //jan = [[januaryAL[1], januaryAL[2], januaryAL[3], januaryAL[4]], "January"];
+        //janAdd = januaryAL[1] + januaryAL[2] + januaryAL[3] + januaryAL[4]
+        //console.log('This is JAN: ' + jan)
+        //console.log('This is JAN ADD: ' + janAdd)
+
+        //jan = '[[' + januaryAL[1] + ', ' + januaryAL[2] + ', ' + januaryAL[3] + ', ' + januaryAL[4] + '], "January"],';
 
         return (
             <div className="row">
 
 
-
-                
-
-                {/*
-                            [
-                                [[this.state.value, januaryAL[2], januaryAL[3], januaryAL[4]], "January"],
-                                [[februaryAL[1], februaryAL[2], februaryAL[3], februaryAL[4]], "February"],
-                                [[marchAL[1], marchAL[2], marchAL[3], marchAL[4]], "March"],
-                                [[aprilAL[1], aprilAL[2], aprilAL[3], aprilAL[4]], "April"],
-                                [[mayAL[1], mayAL[2], mayAL[3], mayAL[4]], "May"],
-                                [[juneAL[1], juneAL[2], juneAL[3], juneAL[4]], "June"],
-                                [[julyAL[1], julyAL[2], julyAL[3], julyAL[4]], "July"],
-                                [[augustAL[1], augustAL[2], augustAL[3], augustAL[4]], "August"]
-                            ]
-
-                            {jan = '[' + januaryAL[1] + ',' + januaryAL[2] + ',' + januaryAL[3] + ',' + januaryAL[4] + '], "January"'}
-
-                */}
 
 
                 <div class="column tableleft">
@@ -421,7 +411,7 @@ class Graphs extends React.Component {
 
 
                 <div class="column tableright">
-                    <h1 className="graphsHeader" style={{ color: '#4F6472' }}>Incoming call stats</h1>
+                    <h1 className="graphsHeader" style={{ color: '#4F6472' }}>Incoming Call Stats</h1>
 
                     <div style={{ color: '#4F6472' }}>
                         <LineGraph
