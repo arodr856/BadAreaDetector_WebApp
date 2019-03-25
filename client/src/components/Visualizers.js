@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Gauge from './Gauge'
 import CallTable from './CallTable'
 
+var addCall = 0;
 
 class Visualizer extends React.Component {
 

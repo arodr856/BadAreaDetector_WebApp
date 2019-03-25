@@ -3,6 +3,16 @@ import { BarGraph, LineGraph } from 'carbon-addons-data-viz-react'
 import { connect } from 'react-redux';
 
 var simulateOnce = true;
+var addCall = 0;
+
+var januaryAL = []
+var februaryAL = []
+var marchAL = []
+var aprilAL = []
+var mayAL = []
+var juneAL = []
+var julyAL = []
+var augustAL = []
 
 class Graphs extends React.Component {
 
@@ -21,28 +31,297 @@ class Graphs extends React.Component {
         this.simulate = this.simulate.bind(this)
     }
 
-    simulate() {
+    simulate(obj, refresh, length) {
 
             setTimeout(
                 () => {
 
-                    if (this.props.toggle) {
-
-                        this.setState({
-                            value: Math.ceil(Math.random() * 100),
-                            //refreshValue: this.props.refresh,
-                            //liveToggled: this.props.toggle,
-                            //filteredData: this.props.filteredCalls
-                        });
-                        console.log('In Graphs: ' + this.props.refresh)
-                        console.log('Toggle in Graphs: ' + this.props.toggle)
-                        //console.log('This is filtered Data: ' + this.state.filteredData)
-                        this.simulate()
+                    if (this.props.toggle && this.props.refresh == refresh && (this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length)) {
+                        if (addCall < obj.length - 1) {
+                            this.setState({
+                                value: Math.ceil(Math.random() * 100),
+                                //refreshValue: this.props.refresh,
+                                //liveToggled: this.props.toggle,
+                                //filteredData: this.props.filteredCalls
+                            });
+                                //console.log('Addcall in GRAPH.JS ' + addCall)
+                            ++addCall
+                            this.simulate(obj, refresh, length)
+                        }
+                        else {
+                            addCall = 0;
+                            simulateOnce = true;
+                            console.log('Simulation has finished!');
+                        }
+                    }
+                    else {
+                        if (this.props.toggle) {
+                            addCall = 0;
+                            this.simulate(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length)
+                        }
+                        else {
+                            console.log('Simulation Finished!')
+                        }
                     }
                 },
                 this.props.refresh * 1000);
     }
 
+    
+    constructGraphs() {
+
+        console.log('Constructing Graphs...')
+
+        if (this.props.filteredCalls == null) {
+            this.props.policeCall.map(({ B, L }) => {
+                //January
+                if (B.substring(0, 1) === "1") {
+                    if (L === '1') {
+                        januaryAL[1] = ++januaryAL[1]
+                    }
+                    else if (L === '2') {
+                        januaryAL[2] = ++januaryAL[2]
+                    }
+                    else if (L === '3') {
+                        januaryAL[3] = ++januaryAL[3]
+                    }
+                    else if (L === '4') {
+                        januaryAL[4] = ++januaryAL[4]
+                    }
+                }
+                //February
+                else if (B.substring(0, 1) === "2") {
+                    if (L === '1') {
+                        februaryAL[1] = ++februaryAL[1]
+                    }
+                    else if (L === '2') {
+                        februaryAL[2] = ++februaryAL[2]
+                    }
+                    else if (L === '3') {
+                        februaryAL[3] = ++februaryAL[3]
+                    }
+                    else if (L === '4') {
+                        februaryAL[4] = ++februaryAL[4]
+                    }
+                }
+                //March
+                else if (B.substring(0, 1) === "3") {
+                    if (L === '1') {
+                        marchAL[1] = ++marchAL[1]
+                    }
+                    else if (L === '2') {
+                        marchAL[2] = ++marchAL[2]
+                    }
+                    else if (L === '3') {
+                        marchAL[3] = ++marchAL[3]
+                    }
+                    else if (L === '4') {
+                        marchAL[4] = ++marchAL[4]
+                    }
+                }
+                //April
+                else if (B.substring(0, 1) === "4") {
+                    if (L === '1') {
+                        aprilAL[1] = ++aprilAL[1]
+                    }
+                    else if (L === '2') {
+                        aprilAL[2] = ++aprilAL[2]
+                    }
+                    else if (L === '3') {
+                        aprilAL[3] = ++aprilAL[3]
+                    }
+                    else if (L === '4') {
+                        aprilAL[4] = ++aprilAL[4]
+                    }
+                }
+                //May
+                else if (B.substring(0, 1) === "5") {
+                    if (L === '1') {
+                        mayAL[1] = ++mayAL[1]
+                    }
+                    else if (L === '2') {
+                        mayAL[2] = ++mayAL[2]
+                    }
+                    else if (L === '3') {
+                        mayAL[3] = ++mayAL[3]
+                    }
+                    else if (L === '4') {
+                        mayAL[4] = ++mayAL[4]
+                    }
+                }
+                //June
+                else if (B.substring(0, 1) === "6") {
+                    if (L === '1') {
+                        juneAL[1] = ++juneAL[1]
+                    }
+                    else if (L === '2') {
+                        juneAL[2] = ++juneAL[2]
+                    }
+                    else if (L === '3') {
+                        juneAL[3] = ++juneAL[3]
+                    }
+                    else if (L === '4') {
+                        juneAL[4] = ++juneAL[4]
+                    }
+                }
+                //July
+                else if (B.substring(0, 1) === "7") {
+                    if (L === '1') {
+                        julyAL[1] = ++julyAL[1]
+                    }
+                    else if (L === '2') {
+                        julyAL[2] = ++julyAL[2]
+                    }
+                    else if (L === '3') {
+                        julyAL[3] = ++julyAL[3]
+                    }
+                    else if (L === '4') {
+                        julyAL[4] = ++julyAL[4]
+                    }
+                }
+                //August
+                else if (B.substring(0, 1) === "8") {
+                    if (L === '1') {
+                        augustAL[1] = ++augustAL[1]
+                    }
+                    else if (L === '2') {
+                        augustAL[2] = ++augustAL[2]
+                    }
+                    else if (L === '3') {
+                        augustAL[3] = ++augustAL[3]
+                    }
+                    else if (L === '4') {
+                        augustAL[4] = ++augustAL[4]
+                    }
+                }
+            })
+        }
+
+        else {
+            this.props.filteredCalls.map(({ B, L }) => {
+                //January
+                if (B.substring(0, 1) === "1") {
+                    if (L === '1') {
+                        januaryAL[1] = ++januaryAL[1]
+                    }
+                    else if (L === '2') {
+                        januaryAL[2] = ++januaryAL[2]
+                    }
+                    else if (L === '3') {
+                        januaryAL[3] = ++januaryAL[3]
+                    }
+                    else if (L === '4') {
+                        januaryAL[4] = ++januaryAL[4]
+                    }
+                }
+                //February
+                else if (B.substring(0, 1) === "2") {
+                    if (L === '1') {
+                        februaryAL[1] = ++februaryAL[1]
+                    }
+                    else if (L === '2') {
+                        februaryAL[2] = ++februaryAL[2]
+                    }
+                    else if (L === '3') {
+                        februaryAL[3] = ++februaryAL[3]
+                    }
+                    else if (L === '4') {
+                        februaryAL[4] = ++februaryAL[4]
+                    }
+                }
+                //March
+                else if (B.substring(0, 1) === "3") {
+                    if (L === '1') {
+                        marchAL[1] = ++marchAL[1]
+                    }
+                    else if (L === '2') {
+                        marchAL[2] = ++marchAL[2]
+                    }
+                    else if (L === '3') {
+                        marchAL[3] = ++marchAL[3]
+                    }
+                    else if (L === '4') {
+                        marchAL[4] = ++marchAL[4]
+                    }
+                }
+                //April
+                else if (B.substring(0, 1) === "4") {
+                    if (L === '1') {
+                        aprilAL[1] = ++aprilAL[1]
+                    }
+                    else if (L === '2') {
+                        aprilAL[2] = ++aprilAL[2]
+                    }
+                    else if (L === '3') {
+                        aprilAL[3] = ++aprilAL[3]
+                    }
+                    else if (L === '4') {
+                        aprilAL[4] = ++aprilAL[4]
+                    }
+                }
+                //May
+                else if (B.substring(0, 1) === "5") {
+                    if (L === '1') {
+                        mayAL[1] = ++mayAL[1]
+                    }
+                    else if (L === '2') {
+                        mayAL[2] = ++mayAL[2]
+                    }
+                    else if (L === '3') {
+                        mayAL[3] = ++mayAL[3]
+                    }
+                    else if (L === '4') {
+                        mayAL[4] = ++mayAL[4]
+                    }
+                }
+                //June
+                else if (B.substring(0, 1) === "6") {
+                    if (L === '1') {
+                        juneAL[1] = ++juneAL[1]
+                    }
+                    else if (L === '2') {
+                        juneAL[2] = ++juneAL[2]
+                    }
+                    else if (L === '3') {
+                        juneAL[3] = ++juneAL[3]
+                    }
+                    else if (L === '4') {
+                        juneAL[4] = ++juneAL[4]
+                    }
+                }
+                //July
+                else if (B.substring(0, 1) === "7") {
+                    if (L === '1') {
+                        julyAL[1] = ++julyAL[1]
+                    }
+                    else if (L === '2') {
+                        julyAL[2] = ++julyAL[2]
+                    }
+                    else if (L === '3') {
+                        julyAL[3] = ++julyAL[3]
+                    }
+                    else if (L === '4') {
+                        julyAL[4] = ++julyAL[4]
+                    }
+                }
+                //August
+                else if (B.substring(0, 1) === "8") {
+                    if (L === '1') {
+                        augustAL[1] = ++augustAL[1]
+                    }
+                    else if (L === '2') {
+                        augustAL[2] = ++augustAL[2]
+                    }
+                    else if (L === '3') {
+                        augustAL[3] = ++augustAL[3]
+                    }
+                    else if (L === '4') {
+                        augustAL[4] = ++augustAL[4]
+                    }
+                }
+            })
+        }
+    }
     
 
 
@@ -51,21 +330,14 @@ class Graphs extends React.Component {
 
 
 
-        var januaryAL = []
+        
         createArrayListInstances(januaryAL)
-        var februaryAL = []
         createArrayListInstances(februaryAL)
-        var marchAL = []
         createArrayListInstances(marchAL)
-        var aprilAL = []
         createArrayListInstances(aprilAL)
-        var mayAL = []
         createArrayListInstances(mayAL)
-        var juneAL = []
         createArrayListInstances(juneAL)
-        var julyAL = []
         createArrayListInstances(julyAL)
-        var augustAL = []
         createArrayListInstances(augustAL)
 
 
@@ -81,19 +353,12 @@ class Graphs extends React.Component {
             monthMap[4] = 0
         }
 
-        //if (!this.state.liveToggled) {
-        //    this.componentDidMount()
-        //}
-
-        //console.log("Test2")
-
-
-        
+        this.constructGraphs()
 
         if (this.props.toggle && simulateOnce) {
             simulateOnce = false;
-            console.log('Simulate once is: ' + simulateOnce);
-            this.simulate()
+            //console.log('Simulate once is: ' + simulateOnce);
+            this.simulate(this.props.filteredCalls == null ? this.props.policeCall : this.props.filteredCalls, this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length) //Object, Refresh, length
         }
         else if (!this.props.toggle) {
             simulateOnce = true;
@@ -105,128 +370,23 @@ class Graphs extends React.Component {
 
 
 
-                {this.props.policeCall.map(({ B, L }) => {
-                    //January
-                    if (B.substring(0, 1) === "1") {
-                        if (L === '1') {
-                            januaryAL[1] = ++januaryAL[1]
-                        }
-                        else if (L === '2') {
-                            januaryAL[2] = ++januaryAL[2]
-                        }
-                        else if (L === '3') {
-                            januaryAL[3] = ++januaryAL[3]
-                        }
-                        else if (L === '4') {
-                            januaryAL[4] = ++januaryAL[4]
-                        }
-                    }
-                    //February
-                    else if (B.substring(0, 1) === "2") {
-                        if (L === '1') {
-                            februaryAL[1] = ++februaryAL[1]
-                        }
-                        else if (L === '2') {
-                            februaryAL[2] = ++februaryAL[2]
-                        }
-                        else if (L === '3') {
-                            februaryAL[3] = ++februaryAL[3]
-                        }
-                        else if (L === '4') {
-                            februaryAL[4] = ++februaryAL[4]
-                        }
-                    }
-                    //March
-                    else if (B.substring(0, 1) === "3") {
-                        if (L === '1') {
-                            marchAL[1] = ++marchAL[1]
-                        }
-                        else if (L === '2') {
-                            marchAL[2] = ++marchAL[2]
-                        }
-                        else if (L === '3') {
-                            marchAL[3] = ++marchAL[3]
-                        }
-                        else if (L === '4') {
-                            marchAL[4] = ++marchAL[4]
-                        }
-                    }
-                    //April
-                    else if (B.substring(0, 1) === "4") {
-                        if (L === '1') {
-                            aprilAL[1] = ++aprilAL[1]
-                        }
-                        else if (L === '2') {
-                            aprilAL[2] = ++aprilAL[2]
-                        }
-                        else if (L === '3') {
-                            aprilAL[3] = ++aprilAL[3]
-                        }
-                        else if (L === '4') {
-                            aprilAL[4] = ++aprilAL[4]
-                        }
-                    }
-                    //May
-                    else if (B.substring(0, 1) === "5") {
-                        if (L === '1') {
-                            mayAL[1] = ++mayAL[1]
-                        }
-                        else if (L === '2') {
-                            mayAL[2] = ++mayAL[2]
-                        }
-                        else if (L === '3') {
-                            mayAL[3] = ++mayAL[3]
-                        }
-                        else if (L === '4') {
-                            mayAL[4] = ++mayAL[4]
-                        }
-                    }
-                    //June
-                    else if (B.substring(0, 1) === "6") {
-                        if (L === '1') {
-                            juneAL[1] = ++juneAL[1]
-                        }
-                        else if (L === '2') {
-                            juneAL[2] = ++juneAL[2]
-                        }
-                        else if (L === '3') {
-                            juneAL[3] = ++juneAL[3]
-                        }
-                        else if (L === '4') {
-                            juneAL[4] = ++juneAL[4]
-                        }
-                    }
-                    //July
-                    else if (B.substring(0, 1) === "7") {
-                        if (L === '1') {
-                            julyAL[1] = ++julyAL[1]
-                        }
-                        else if (L === '2') {
-                            julyAL[2] = ++julyAL[2]
-                        }
-                        else if (L === '3') {
-                            julyAL[3] = ++julyAL[3]
-                        }
-                        else if (L === '4') {
-                            julyAL[4] = ++julyAL[4]
-                        }
-                    }
-                    //August
-                    else if (B.substring(0, 1) === "8") {
-                        if (L === '1') {
-                            augustAL[1] = ++augustAL[1]
-                        }
-                        else if (L === '2') {
-                            augustAL[2] = ++augustAL[2]
-                        }
-                        else if (L === '3') {
-                            augustAL[3] = ++augustAL[3]
-                        }
-                        else if (L === '4') {
-                            augustAL[4] = ++augustAL[4]
-                        }
-                    }
-                })}
+                
+
+                {/*
+                            [
+                                [[this.state.value, januaryAL[2], januaryAL[3], januaryAL[4]], "January"],
+                                [[februaryAL[1], februaryAL[2], februaryAL[3], februaryAL[4]], "February"],
+                                [[marchAL[1], marchAL[2], marchAL[3], marchAL[4]], "March"],
+                                [[aprilAL[1], aprilAL[2], aprilAL[3], aprilAL[4]], "April"],
+                                [[mayAL[1], mayAL[2], mayAL[3], mayAL[4]], "May"],
+                                [[juneAL[1], juneAL[2], juneAL[3], juneAL[4]], "June"],
+                                [[julyAL[1], julyAL[2], julyAL[3], julyAL[4]], "July"],
+                                [[augustAL[1], augustAL[2], augustAL[3], augustAL[4]], "August"]
+                            ]
+
+                            {jan = '[' + januaryAL[1] + ',' + januaryAL[2] + ',' + januaryAL[3] + ',' + januaryAL[4] + '], "January"'}
+
+                */}
 
 
                 <div class="column tableleft">

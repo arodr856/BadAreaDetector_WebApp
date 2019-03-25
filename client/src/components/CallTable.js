@@ -38,10 +38,9 @@ class CallTable extends React.Component {
         this.simulateData = this.simulateData.bind(this)
     }
 
-    //(this.props.filteredCalls == null ? this.props.policeCall.length == length : this.props.filteredCalls.length == length) && (this.props.refresh == refresh))
-
+    
     simulateData(rows, refresh, length) {
-        console.log('LAUNCHING!')
+        //console.log('LAUNCHING!')
         console.log('...Refresh is: ' + refresh + '...length: ' + length + '...Addcall is: ' + addCall)
 
 
@@ -60,7 +59,7 @@ class CallTable extends React.Component {
                 }
             }
             else {
-                if (this.props.toggle) {
+                if (this.props.toggle) { //case: Simulation is continuing, but user changes data
                     addCall = 0
                     console.log('DATA CHANGED')
                     this.forceUpdate()
@@ -109,7 +108,7 @@ class CallTable extends React.Component {
         //IMPLEMENT SIMULATION
         if (this.props.toggle && simulateOnce) {
             simulateOnce = false;
-            this.simulateData(this.props.filteredCalls == null ? this.displayAllData(this.props.policeCall) : this.displayAllData(this.props.filteredCalls), this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length) //Object, Count, Refresh, length
+            this.simulateData(this.props.filteredCalls == null ? this.displayAllData(this.props.policeCall) : this.displayAllData(this.props.filteredCalls), this.props.refresh, this.props.filteredCalls == null ? this.props.policeCall.length : this.props.filteredCalls.length) //Object, Refresh, length
         }
 
         else if (!this.props.toggle) { // RESET VALUES WHEN TOGGLE IS TRIGGERED OFF
