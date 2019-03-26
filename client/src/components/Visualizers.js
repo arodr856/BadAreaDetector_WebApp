@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import Gauge from './Gauge'
 import CallTable from './CallTable'
-import { GaugeGraph } from 'carbon-addons-data-viz-react'
+import  Gauge  from 'react-svg-gauge'
 
 var addCall = 0;
 var gaugeDetail = 20;
-//var simulateOnce = true;
+var simulateOnce = true;
 
 class Visualizer extends React.Component {
 
@@ -34,10 +33,10 @@ class Visualizer extends React.Component {
 
     render() {
 
-        //if (this.props.toggle && simulateOnce) {
-        //    simulateOnce = false;
-        //    this.simulate()
-        //}
+        if (this.props.toggle && simulateOnce) {
+            simulateOnce = false;
+            this.simulate()
+        }
 
         //console.log('UPDATED VISUALIZER')
         //console.log('DETAIL: ' + gaugeDetail)
@@ -64,12 +63,41 @@ class Visualizer extends React.Component {
 
 
 
-        //console.log("Total amount of priority 1: " + priority[1])
-        //console.log("Total amount of priority 2: " + priority[2])
-        //console.log("Total amount of priority 3: " + priority[3])
-        //console.log("Total amount of priority 4: " + priority[4])
-        //console.log("Total calls: " + totalPriority)
+        console.log("Total amount of priority 1: " + priority[1])
+        console.log("Total amount of priority 2: " + priority[2])
+        console.log("Total amount of priority 3: " + priority[3])
+        console.log("Total amount of priority 4: " + priority[4])
+        console.log("Total calls: " + totalPriority)
 
+        
+        this.props.policeCall.map(({ L }) => {
+
+            if (L === '1') {
+                priority[1]++;
+                totalPriority++
+            }
+            else if (L === '2') {
+                priority[2]++;
+                totalPriority++
+            }
+            else if (L === '3') {
+                priority[3]++;
+                totalPriority++
+            }
+            else if (L === '4') {
+                priority[4]++;
+                totalPriority++
+            }
+        })
+        
+
+        /*
+         *      <Gauge gaugeSpecs={{ id: "Gauge1", size: "half", amount: gaugeDetail, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge1' }} classProperties={{ className1: 'gauge1', className2: 'gaugeText' }} other={{ title: 'Assault' }} />
+                <Gauge gaugeSpecs={{ id: "Gauge2", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge2' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Murder' }} />
+                <Gauge gaugeSpecs={{ id: "Gauge3", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge3' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Ransom' }} />
+                <Gauge gaugeSpecs={{ id: "Gauge4", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge4' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Car Theft' }} />
+         * 
+        */
         gaugeAmount1 = Math.round((priority[1] / totalPriority) * 100)
         gaugeAmount2 = Math.round((priority[2] / totalPriority) * 100)
         gaugeAmount3 = Math.round((priority[3] / totalPriority) * 100)
@@ -80,41 +108,19 @@ class Visualizer extends React.Component {
 
             <div class="column piecharts" style={{ color: '#4F6472' }}>
 
-                {console.log('Printing from Visualizer: ' + this.props.refresh)}
-
-                {this.props.policeCall.map(({ L }) => {
-
-                    if (L === '1') {
-                        priority[1]++;
-                        totalPriority++
-                    }
-                    else if (L === '2') {
-                        priority[2]++;
-                        totalPriority++
-                    }
-                    else if (L === '3') {
-                        priority[3]++;
-                        totalPriority++
-                    }
-                    else if (L === '4') {
-                        priority[4]++;
-                        totalPriority++
-                    }
-                })
-                }
+                
 
 
 
                 <h1 className="callTypeHeader">Call Type</h1>
 
 
-                <Gauge gaugeSpecs={{ id: "Gauge1", size: "half", amount: gaugeDetail, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge1' }} classProperties={{ className1: 'gauge1', className2: 'gaugeText' }} other={{ title: 'Assault' }} />
-                <Gauge gaugeSpecs={{ id: "Gauge2", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge2' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Murder' }} />
-                <Gauge gaugeSpecs={{ id: "Gauge3", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge3' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Ransom' }} />
-                <Gauge gaugeSpecs={{ id: "Gauge4", size: "half", amount: this.state.value, valueText: this.state.value + ' %', labelText: ' ', tooltipId: 'Gauge4' }} classProperties={{ className1: 'gauge234', className2: 'gaugeText' }} other={{ title: 'Car Theft' }} />
-
-
-
+                <div style={{ paddingLeft: '5%' }}>
+                    <Gauge value={gaugeAmount1} width={235} height={150} label='Priority1' color='#748B99' />
+                    <Gauge value={gaugeAmount2} width={235} height={150} label='Priority2' color='#748B99' />
+                    <Gauge value={gaugeAmount3} width={235} height={150} label='Priority3' color='#748B99' />
+                    <Gauge value={gaugeAmount4} width={235} height={150} label='Priority4' color='#748B99' />
+                </div>
 
                 {/*Data Table with all calls*/}
                 <CallTable />
