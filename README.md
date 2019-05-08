@@ -10,7 +10,7 @@ The application was originally built on General Electric’s “Industrial Inter
 
 <b>Step 1.</b> Setup a github or Sign in
 
-Sign into your github account or click <a href="https://github.com/join">here</a> to create one.
+  1. Sign into your github account or click <a href="https://github.com/join">here</a> to create one.
 
 <b>Step 2.</b> Fork the repository
 
