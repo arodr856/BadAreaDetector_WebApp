@@ -44,7 +44,7 @@ Now you have the repository on your local device.
 
 ## Install Dependencies 
 
-<b>Step 1.</b> Navigate into the root of the repository.
+<b>Step 1.</b> Navigate into the root directory of the project repository.
 
 <b>Step 2.</b> Open PowerShell in the directory as shown:
   <img width="573" alt="PowerShell" src="https://user-images.githubusercontent.com/25447970/57409492-47ce0900-719d-11e9-8b69-66c7caa26c4f.PNG">
@@ -59,7 +59,13 @@ You have now successfully installed all dependencies!
 
 ## Running BAD
 
-<b>Step 1: </b> Navigate into the root of the repository.
+<b>Step 1: </b> Navigate into the root directory of the project folder.
 
 <b>Step 2: </b> In the path directory, type ```PowerShell npm run dev``` <img width="258" alt="PowerShell2" src="https://user-images.githubusercontent.com/25447970/57412674-4ce38600-71a6-11e9-8a5e-af296f536ba2.PNG">
 
+## Compatible Browsers
+
+Google Chrome (73.0.3683 or lower)
+Firefox (65.0.2 or lower)
+Microsoft Edge (44.17763 or lower)
+Safari (12.1 or lower)
