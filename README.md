@@ -56,3 +56,7 @@ Now you have the repository on your local device.
 <b>Step 5.</b> Then type: ```npm install``` once more. Then wait for all libraries to install.
 
 You have now successfully installed all dependencies!
+
+## Running BAD
+
+<b>Step 1: </b> Navigate into the root of the repository.
