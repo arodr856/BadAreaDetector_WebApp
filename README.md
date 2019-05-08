@@ -21,7 +21,6 @@ Sign into your github account or click <a href="https://github.com/join">here</a
   2. Then under repository name, click <b>"Clone and Download"</b> button. <img width="314" alt="Clone" src="https://user-images.githubusercontent.com/25447970/57405698-f1100180-7193-11e9-9ba6-219572c317a2.PNG">
   3. In the Clone with HTTPs section, click <img width="22" alt="Copy" src="https://user-images.githubusercontent.com/25447970/57407971-531f3580-7199-11e9-8209-0ffa4d86d264.PNG">
  to copy the clone URL for the repository. 
-  <img width="264" alt="Popup" src="https://user-images.githubusercontent.com/25447970/57407849-fc196080-7198-11e9-8352-07d1e5cd3d36.PNG">
    
    4. Open GitBash
   
