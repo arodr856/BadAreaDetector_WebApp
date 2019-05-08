@@ -66,6 +66,9 @@ You have now successfully installed all dependencies!
 ## Compatible Browsers
 
 Google Chrome (73.0.3683 or lower)
+
 Firefox (65.0.2 or lower)
+
 Microsoft Edge (44.17763 or lower)
+
 Safari (12.1 or lower)
