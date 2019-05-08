@@ -61,5 +61,5 @@ You have now successfully installed all dependencies!
 
 <b>Step 1: </b> Navigate into the root of the repository.
 
-<b>Step 2: </b> In the path, type ```PowerShell npm run dev``` <img width="258" alt="PowerShell2" src="https://user-images.githubusercontent.com/25447970/57412674-4ce38600-71a6-11e9-8a5e-af296f536ba2.PNG">
+<b>Step 2: </b> In the path directory, type ```PowerShell npm run dev``` <img width="258" alt="PowerShell2" src="https://user-images.githubusercontent.com/25447970/57412674-4ce38600-71a6-11e9-8a5e-af296f536ba2.PNG">
 
